@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>World Recipes</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 2rem; }
+    img { max-width: 100%; border-radius: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>World Recipes</h1>
+  <div id="recipe"></div>
+  <script>
+    fetch('recipes.json')
+      .then(res => res.json())
+      .then(data => {
+        const meal = data.meals[0];
+        document.getElementById('recipe').innerHTML = `
+          <h2>${meal.strMeal}</h2>
+          <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+          <p>${meal.strInstructions.substring(0, 500)}...</p>
+        `;
+      });
+  </script>
+</body>
+</html>
